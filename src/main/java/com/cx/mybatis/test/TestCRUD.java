@@ -19,18 +19,19 @@ public class TestCRUD {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
             //测试添加
-//            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
-//            Employee employee = new Employee(null,"jerry","1","uxiao@111.com");
-//            employeeMapper.addEmp(employee);
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+            Employee employee = new Employee(null,"duoduo","1","uxiao@111.com");
+            employeeMapper.addEmp(employee);
+            System.out.println("获取到的主键值:"+employee.getId());
 
             //测试更新
-            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+//            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
 //            Employee employee = new Employee(2,"jerry","0","uxiao@222.com");
 //            employeeMapper.updateEmp(employee);
 
             //测试查找
-            Employee employee = employeeMapper.getEmployeeById(2);
-            System.out.println(employee.toString());//ghfhfhg
+//            Employee employee = employeeMapper.getEmployeeById(2);
+//            System.out.println(employee.toString());
             sqlSession.commit();
         }finally {
             sqlSession.close();
@@ -39,6 +40,14 @@ public class TestCRUD {
 
 
 
+    }
+
+    @Test
+    public void testGetEmployeeByIdAndLastname() throws IOException {
+        SqlSessionFactory sessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sessionFactory.openSession();
+        EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+        employeeMapper.getEmployeeByIdAndLastname(1,"tom");
     }
 
     static SqlSessionFactory getSqlSessionFactory() throws IOException {

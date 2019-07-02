@@ -8,7 +8,8 @@
         SELECT * FROM  tbl_employee WHERE  id = #{id};
     </select>
 
-    <insert id="addEmp" parameterType="com.cx.mybatis.bean.Employee">
+    <!--useGeneratedKeys 获取自增主键值，keyProperty指定将获取到的主键值赋值给javabean的哪个属性-->
+    <insert id="addEmp" parameterType="com.cx.mybatis.bean.Employee" useGeneratedKeys="true" keyProperty="id">
         insert into tbl_employee (last_name,email,gender) values (#{last_name},#{email},#{gender});
     </insert>
 
@@ -21,7 +22,8 @@
         delete from tbl_employee where id = #{id}
     </delete>
 
-
-
+    <select id="getEmployeeByIdAndLastname"  resultType="Employee">
+        select * from tbl_employee where id = #{id} and last_name = {last_name}
+    </select>
 
 </mapper>
