@@ -23,7 +23,11 @@
     </delete>
 
     <select id="getEmployeeByIdAndLastname"  resultType="Employee">
-        select * from tbl_employee where id = #{id} and last_name = {last_name}
+        select * from tbl_employee where id = #{id} and last_name = #{last_name}
+    </select>
+
+    <select id="getEmployeeByMap" resultType="Employee">
+       select * from tbl_employee where id = #{id} and last_name = #{lastName}
     </select>
 
 </mapper>

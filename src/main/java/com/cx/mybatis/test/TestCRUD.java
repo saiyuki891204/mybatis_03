@@ -10,6 +10,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestCRUD {
 
@@ -47,7 +49,24 @@ public class TestCRUD {
         SqlSessionFactory sessionFactory = getSqlSessionFactory();
         SqlSession sqlSession = sessionFactory.openSession();
         EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
-        employeeMapper.getEmployeeByIdAndLastname(1,"tom");
+        Employee employee = employeeMapper.getEmployeeByIdAndLastname(1,"tom");
+        System.out.println(employee);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void testGetEmployeeByMap() throws IOException {
+        SqlSessionFactory sessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sessionFactory.openSession();
+        EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+        Map map = new HashMap();
+        map.put("id",1);
+        map.put("lastName","tom");
+        Employee employee = employeeMapper.getEmployeeByMap(map);
+        System.out.println(employee);
+        sqlSession.commit();
+        sqlSession.close();
     }
 
     static SqlSessionFactory getSqlSessionFactory() throws IOException {
