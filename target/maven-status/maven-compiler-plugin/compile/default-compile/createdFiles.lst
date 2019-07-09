@@ -1,0 +1,4 @@
+com\cx\mybatis\dao\mapper\EmployeeMapper.class
+com\cx\mybatis\bean\Employee.class
+com\cx\mybatis\dao\mapper\EmployeeMapperAnotation.class
+com\cx\mybatis\test\MyBatisTest.class

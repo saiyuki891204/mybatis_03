@@ -11,9 +11,36 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TestCRUD {
+
+    @Test
+    public void testGetEmpListByLastnameLike() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        try {
+            EmployeeMapper employeeMapper = sqlSession.getMapper(EmployeeMapper.class);
+//            List<Employee> list = employeeMapper.getEmpListByLastnameLike("%e%");
+//            for (Employee employee : list){
+//                System.out.println(employee);
+//            }
+
+//            Map<String, Object> returnMap = employeeMapper.getEmployeeByIdReturnMap(1);
+//            System.out.println("========="+returnMap.get("last_name"));
+
+            Map<Integer, Employee> returnMap = employeeMapper.getEmpListByLastnameLikeReturnMap("%e%");
+            System.out.println("========="+returnMap.size());
+            Employee employee = returnMap.get(2);
+            System.out.println(employee.getLast_name()+"**********");
+
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+
+        }
+    }
 
     @Test
     public void test01() throws IOException {
