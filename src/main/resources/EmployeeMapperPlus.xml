@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cx.mybatis.dao.mapper.EmployeeMapperPlus">
+
+    <!--级联属性-->
+    <resultMap id="MydifEmp" type="com.cx.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="last_name"/>
+        <result column="gender" property="gender"/>
+        <result column="did" property="dept.id"/>
+        <result column="dept_name" property="dept.dept_name"/>
+    </resultMap>
+
+    <!--association可以用来指定联合的javabean对象-->
+    <resultMap id="MydifEmp2" type="com.cx.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="last_name"/>
+        <result column="gender" property="gender"/>
+        <association property="dept" javaType="com.cx.mybatis.bean.Dept">
+            <id column="did" property="id"/>
+            <result column="dept_name" property="dept_name"/>
+        </association>
+      <!--  <result column="did" property="dept.id"/>
+        <result column="dept_name" property="dept.dept_name"/>-->
+    </resultMap>
+
+    <!--查询员工的同时查询部门信息-->
+    <select id="getEmpAndDept" resultMap="MydifEmp2" >
+        SELECT e.id id,e.last_name last_name,e.gender gender, e.d_id did,
+         d.dept_name dept_name
+         FROM  tbl_employee as e ,tbl_dept as d WHERE  e.d_id = d.id and e.id = #{id};
+    </select>
+
+
+
+
+
+</mapper>
