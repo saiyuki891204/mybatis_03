@@ -7,9 +7,11 @@
     <properties resource="mysql.properties"></properties>
 
     <!--将数据库的驼峰和javabean对应-->
-   <!-- <settings>
+<!--
+    <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>-->
+    </settings>
+-->
 
     <!--别名处理器 type是要起别名的这个类的全类名，默认别名就是类名小写-->
     <!--别名不区别大小写-->
@@ -61,6 +63,7 @@
     <mappers>
         <!--class注册接口，映射文件必须 和接口同名且放在同级目录下-->
         <mapper resource="EmployeeMapper.xml" />
+        <mapper resource="EmployeeMapperPlus.xml" />
 
 
         <!--没有sql映射文件  所有的sql都是利用注解写在接口上-->
