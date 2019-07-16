@@ -64,6 +64,7 @@
         <!--class注册接口，映射文件必须 和接口同名且放在同级目录下-->
         <mapper resource="EmployeeMapper.xml" />
         <mapper resource="EmployeeMapperPlus.xml" />
+        <mapper resource="DeptMapper.xml" />
 
 
         <!--没有sql映射文件  所有的sql都是利用注解写在接口上-->

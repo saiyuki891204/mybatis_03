@@ -34,7 +34,21 @@
     </select>
 
 
+<!--分段 查询的好处之一是可以使用懒加载和按需加载-->
+    <resultMap id="MyEmpByStep" type="com.cx.mybatis.bean.Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="last_name"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <association property="dept"
+            select="com.cx.mybatis.dao.mapper.DeptMapper.getDeptById"
+        column="d_id"></association>
+        <!--将d_id作为参数传到select语句中 select查询的是Employee的dept属性，查出来后框架会set到employee对象中-->
+    </resultMap>
 
+    <select id="getEmpByIdStep" resultMap="MyEmpByStep">
+        select * from tbl_employee where id = #{id}
+    </select>
 
 
 </mapper>

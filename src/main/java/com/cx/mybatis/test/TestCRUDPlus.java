@@ -17,6 +17,25 @@ import java.util.Map;
 public class TestCRUDPlus {
 
     @Test
+    public void getEmpByIdStep() throws IOException {
+        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        EmployeeMapperPlus employeeMapperPlus = sqlSession.getMapper(EmployeeMapperPlus.class);
+
+        try {
+            Employee employee = employeeMapperPlus.getEmpByIdStep(1);
+
+            System.out.println(employee.toString());
+            System.out.println(employee.getDept().toString());
+            sqlSession.commit();
+        }finally {
+            sqlSession.close();
+
+        }
+    }
+
+    @Test
     public void testgetEmpAndDept() throws IOException {
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         SqlSession sqlSession = sqlSessionFactory.openSession();
